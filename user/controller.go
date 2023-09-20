@@ -3,7 +3,7 @@ package user
 import "errors"
 
 type authorization struct {
-	Token string `json:"token"`
+	UserID int
 }
 
 type User struct {
@@ -12,9 +12,9 @@ type User struct {
 }
 
 func login(user User) (*authorization, error) {
-	for _, u := range userStorage {
+	for id, u := range userStorage {
 		if u.password == user.password {
-			return &authorization{Token: ""}, nil
+			return &authorization{UserID: id}, nil
 		}
 	}
 
